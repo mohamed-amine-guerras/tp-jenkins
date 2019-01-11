@@ -8,5 +8,13 @@ pipeline {
         bat 'C:\\Users\\dell\\Documents\\gradle-4.10.2\\bin\\gradle uploadArchives'
       }
     }
+    stage('Mail Notification') {
+      steps {
+        catchError() {
+          mail(subject: 'Build Failed', body: 'the last build has failed')
+        }
+
+      }
+    }
   }
 }
