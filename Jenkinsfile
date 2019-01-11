@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        bat 'bat gradle build'
+        bat 'C:\\Users\\dell\\Documents\\gradle-4.10.2\\bin\\gradle build'
       }
     }
   }
