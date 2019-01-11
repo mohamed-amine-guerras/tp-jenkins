@@ -3,9 +3,9 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'gradle buid'
-        sh 'gradle javadoc'
-        sh 'gradle uploadArchives'
+        sh 'bat gradle buid'
+        sh 'bat gradle javadoc'
+        sh 'bat gradle uploadArchives'
       }
     }
   }
