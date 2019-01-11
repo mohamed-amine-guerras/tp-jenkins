@@ -1,0 +1,67 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+}
+
+group 'matrix'
+version "${version}"
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+
+
+task generateMatrixAPI (type:Copy) {
+    from ('build/reports/tests') {
+
+        into 'TestReports'
+    }
+    from ('build/reports/pitest') {
+
+        into 'TestQualityReports'
+    }
+    from ('build/jacocoHtml') {
+
+        into 'TestQualityReports'
+    }
+    from ('build/docs') {
+
+        into 'Documentation'
+    }
+    from ('build/libs') {
+
+        into 'API'
+    }
+    into "C:\\Users\\Amine\\Downloads\\2CS\\outil\\matrixRelease\\Matrix_v_${version}"
+}
+
+
+
+
+
+uploadArchives {
+    repositories {
+
+        maven {
+            credentials {
+                username "myMavenRepo"
+                password "root"
+            }
+            url "https://mymavenrepo.com/repo/YiicBkYvIXLIYkNAGWsg/"
+        }
+    }
+}
+
+
+
+
+project.tasks["generateMatrixAPI"].dependsOn "build"
+project.tasks["uploadArchives"].dependsOn "generateMatrixAPI"
+
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
