@@ -3,7 +3,7 @@ package com.example.model;
 public class Matrix {
 
 	private int nrows;
-	private int ncols;
+	private int ncols; 
 	private double[][] data;
 
 	public Matrix(double[][] dat) {
