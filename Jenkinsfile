@@ -16,8 +16,16 @@ pipeline {
     stage('Code Analysis') {
       parallel {
         stage('Code Analysis') {
+           environment {
+              scannerHome = tool 'sonar-scanner'
+            }
           steps {
-            bat 'C:\\dev\\sonar-scanner-3.2.0.1227-windows\\bin\\sonar-scanner'
+              withSonarQubeEnv('sonarqube') {
+                   bat "${sonarHome}\\sonar-scanner"
+              }
+              timeout(time: 10, unit: 'MINUTES') {
+                  waitForQualityGate abortPipeline: true
+              }
           }
         }
         stage('Test Reporting') {
