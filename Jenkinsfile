@@ -17,7 +17,7 @@ pipeline {
       parallel {
         stage('Code Analysis') {
           environment {
-            scannerHome = tool 'sonar-scanner'
+            scannerHome = 'sonar-scanner'
           }
           steps {
             withSonarQubeEnv('sonarqube') {
@@ -25,7 +25,7 @@ pipeline {
             }
 
             timeout(time: 10, unit: 'MINUTES') {
-              waitForQualityGate abortPipeline: true
+              waitForQualityGate true
             }
 
           }
