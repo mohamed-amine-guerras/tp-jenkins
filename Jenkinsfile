@@ -21,7 +21,7 @@ pipeline {
           }
           steps {
             withSonarQubeEnv('sonarqube') {
-              bat "${sonarHome}\\sonar-scanner"
+              bat "${scannerHome}\\sonar-scanner"
             }
 
             timeout(time: 10, unit: 'MINUTES') {
