@@ -21,7 +21,7 @@ pipeline {
           }
           steps {
             withSonarQubeEnv('sonarqube') {
-              bat "C:\\dev\\sonar-scanner-3.2.0.1227-windows\\bin\\sonar-scanner"
+              bat 'C:\\dev\\sonar-scanner-3.2.0.1227-windows\\bin\\sonar-scanner'
             }
 
             timeout(time: 10, unit: 'MINUTES') {
