@@ -16,16 +16,18 @@ pipeline {
     stage('Code Analysis') {
       parallel {
         stage('Code Analysis') {
-           environment {
-              scannerHome = tool 'sonar-scanner'
-            }
+          environment {
+            scannerHome = 'sonar-scanner'
+          }
           steps {
-              withSonarQubeEnv('sonarqube') {
-                   bat "${sonarHome}\\sonar-scanner"
-              }
-              timeout(time: 10, unit: 'MINUTES') {
-                  waitForQualityGate abortPipeline: true
-              }
+            withSonarQubeEnv('sonarqube') {
+              bat "${sonarHome}\\sonar-scanner"
+            }
+
+            timeout(time: 10, unit: 'MINUTES') {
+              waitForQualityGate true
+            }
+
           }
         }
         stage('Test Reporting') {
