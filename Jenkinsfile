@@ -27,5 +27,11 @@ pipeline {
         }
       }
     }
+    stage('Deployement') {
+      steps {
+        waitForQualityGate true
+        bat 'C:\\Users\\dell\\Documents\\gradle-4.10.2\\bin\\gradle uploadArchives'
+      }
+    }
   }
 }
