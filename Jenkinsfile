@@ -17,7 +17,7 @@ pipeline {
       parallel {
         stage('Code Analysis') {
           environment {
-            scannerHome = tool 'sonar-scanner'
+            scannerHome = 'sonar-scanner'
           }
           steps {
             withSonarQubeEnv('sonarqube') {
@@ -40,6 +40,11 @@ pipeline {
     stage('Deployment') {
       steps {
         bat 'C:\\Users\\dell\\Documents\\gradle-4.10.2\\bin\\gradle uploadArchives'
+      }
+    }
+    stage('Slack Notification') {
+      steps {
+        slackSend()
       }
     }
   }
