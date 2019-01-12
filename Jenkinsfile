@@ -18,7 +18,6 @@ pipeline {
         stage('Code Analysis') {
           steps {
             bat 'C:\\dev\\sonar-scanner-3.2.0.1227-windows\\bin\\sonar-scanner'
-            waitForQualityGate true
           }
         }
         stage('Test Reporting') {
