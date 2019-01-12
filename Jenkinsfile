@@ -17,15 +17,15 @@ pipeline {
       parallel {
         stage('Code Analysis') {
           environment {
-            scannerHome = tool 'sonar-scanner'
+            scannerHome = 'sonar-scanner'
           }
           steps {
             withSonarQubeEnv('sonarqube') {
-              bat "${scannerHome}\\sonar-scanner" 
+              bat "${scannerHome}\\sonar-scanner"
             }
 
             timeout(time: 10, unit: 'MINUTES') {
-              waitForQualityGate abortPipeline: true
+              waitForQualityGate true
             }
 
           }
@@ -35,6 +35,11 @@ pipeline {
             jacoco()
           }
         }
+      }
+    }
+    stage('Deployment') {
+      steps {
+        bat 'C:\\Users\\dell\\Documents\\gradle-4.10.2\\bin\\gradle uploadArchives'
       }
     }
   }
