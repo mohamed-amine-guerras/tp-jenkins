@@ -17,7 +17,7 @@ pipeline {
       parallel {
         stage('Code Analysis') {
           steps {
-            bat 'C:\\dev\\sonar-scanner-3.2.0.1227-windows\\bin\\sonar-scanner'
+            withSonarQubeEnv 'C:\\dev\\sonar-scanner-3.2.0.1227-windows\\bin\\sonar-scanner'
           }
         }
         stage('Test Reporting') {
