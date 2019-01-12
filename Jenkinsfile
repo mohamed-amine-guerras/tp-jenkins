@@ -17,7 +17,7 @@ pipeline {
       parallel {
         stage('Code Analysis') {
           environment {
-            scannerHome = tool 'sonar-scanner'
+            scannerHome = 'sonar-scanner'
           }
           steps {
             withSonarQubeEnv('sonarqube') {
@@ -25,7 +25,7 @@ pipeline {
             }
 
             timeout(time: 10, unit: 'MINUTES') {
-              waitForQualityGate abortPipeline: true
+              waitForQualityGate true
             }
 
           }
@@ -44,7 +44,7 @@ pipeline {
     }
     stage('Slack Notification') {
       steps {
-        slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+        slackSend(color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", baseUrl: 'https://hooks.slack.com/services/TEGVBLC8G/BFBMQPBUZ/', channel: 'gradle', teamDomain: 'https://gradleoutil.slack.com/')
       }
     }
   }
