@@ -10,11 +10,22 @@ pipeline {
     }
     stage('Mail Notification') {
       steps {
-        catchError() {
-          mail(subject: 'Build Failed', body: 'the last build has failed', to: 'fm_guerras@esi.dz', from: 'jenkins-notification@jenkins.com')
-        }
-
         mail(subject: 'Build Succeded', body: 'the last build has succeded', from: 'jenkins-notification@jenkins.com', to: 'fm_guerras@esi.dz')
+      }
+    }
+    stage('Code Analysis') {
+      parallel {
+        stage('Code Analysis') {
+          steps {
+            bat 'C:\\dev\\sonar-scanner-3.2.0.1227-windows\\bin\\sonar-scanner'
+            waitForQualityGate true
+          }
+        }
+        stage('Test Reporting') {
+          steps {
+            jacoco()
+          }
+        }
       }
     }
   }
