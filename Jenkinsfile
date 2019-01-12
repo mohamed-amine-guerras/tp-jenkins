@@ -44,7 +44,7 @@ pipeline {
     }
     stage('Slack Notification') {
       steps {
-        slackSend(color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", baseUrl: 'https://hooks.slack.com/services/TEGVBLC8G/BFBMQPBUZ/', channel: 'gradle', teamDomain: 'https://gradleoutil.slack.com/')
+        slackSend(color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
       }
     }
   }
