@@ -5,7 +5,8 @@ pipeline {
       steps {
         bat 'C:\\Users\\dell\\Documents\\gradle-4.10.2\\bin\\gradle build'
         bat 'C:\\Users\\dell\\Documents\\gradle-4.10.2\\bin\\gradle javadoc'
-        bat 'C:\\Users\\dell\\Documents\\gradle-4.10.2\\bin\\gradle uploadArchives'
+        archiveArtifacts 'build/libs/*jar'
+        archiveArtifacts 'build/docs/javadoc/*html'
       }
      post {
         success {
