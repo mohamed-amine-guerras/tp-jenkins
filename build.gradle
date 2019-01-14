@@ -1,14 +1,11 @@
 plugins {
     id 'java'
     id 'jacoco'
-    id 'io.qameta.allure'
+     id "io.qameta.allure" version "2.5"
 }
 
 
-allure {
-    autoconfigure = true
-    version = '2.4.1'
-}
+
 
 group 'matrix'
 version "${version}"
