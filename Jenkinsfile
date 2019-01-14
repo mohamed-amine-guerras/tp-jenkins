@@ -7,12 +7,18 @@ pipeline {
         bat 'C:\\Users\\dell\\Documents\\gradle-4.10.2\\bin\\gradle javadoc'
         bat 'C:\\Users\\dell\\Documents\\gradle-4.10.2\\bin\\gradle uploadArchives'
       }
-    }
-    stage('Mail Notification') {
-      steps {
-        mail(subject: 'Build Succeded!', body: 'the last build has succeded', from: 'jenkins-notification@jenkins.com', to: 'fm_guerras@esi.dz')
+     post {
+        success {
+        mail(subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", from: 'jenkins-notification@jenkins.com', to: 'fm_guerras@esi.dz')
+        }
+
+        failure {
+          slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+          mail(subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", from: 'jenkins-notification@jenkins.com', to: 'fm_guerras@esi.dz')
+        }
       }
     }
+    
     stage('Code Analysis') {
       parallel {
         stage('Code Analysis') {
