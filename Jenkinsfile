@@ -9,12 +9,10 @@ pipeline {
       }
      post {
         success {
-        mail(subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", from: 'jenkins-notification@jenkins.com', to: 'fm_guerras@esi.dz')
+          mail(subject: 'SUCCESSFUL Job', body: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", from: 'jenkins-notification@jenkins.com', to: 'fm_guerras@esi.dz')
         }
-
         failure {
-          slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-          mail(subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", from: 'jenkins-notification@jenkins.com', to: 'fm_guerras@esi.dz')
+          mail(subject: "FAILED Job", body: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", from: 'jenkins-notification@jenkins.com', to: 'fm_guerras@esi.dz')
         }
       }
     }
