@@ -42,11 +42,17 @@ pipeline {
       }
     }
     stage('Deployment') {
+      when {
+        branch 'master'
+      }
       steps {
         bat 'C:\\Users\\dell\\Documents\\gradle-4.10.2\\bin\\gradle uploadArchives'
       }
     }
     stage('Slack Notification') {
+      when {
+        branch 'master'
+      }
       steps {
         slackSend(color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
       }
